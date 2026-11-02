@@ -19,6 +19,13 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Documentação de instalação, execução e testes.
 - Contrato inicial da API.
 
+### Corrigido
+
+- Validação do corpo JSON para rejeitar valores `null`, arrays e strings.
+- Rejeição de campos desconhecidos nas requisições.
+- Validação de múltiplos objetos JSON no corpo da requisição.
+- Ampliação da cobertura de testes automatizados para 14 cenários.
+
 ### Validação
 
 - 10 testes automatizados executados com sucesso.

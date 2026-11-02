@@ -1,6 +1,7 @@
 package calculator
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"io"
@@ -51,12 +52,35 @@ func MultiplyHandler(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 
-	var request multiplicationRequest
-
+	var raw json.RawMessage
 	decoder := json.NewDecoder(r.Body)
-	decoder.DisallowUnknownFields()
 
-	if err := decoder.Decode(&request); err != nil {
+	if err := decoder.Decode(&raw); err != nil {
+		writeError(w, http.StatusBadRequest,
+			"INVALID_JSON", "JSON inválido.")
+		return
+	}
+
+	var extra any
+	if err := decoder.Decode(&extra); err != io.EOF {
+		writeError(w, http.StatusBadRequest,
+			"INVALID_JSON", "Apenas um objeto JSON é permitido.")
+		return
+	}
+
+	raw = bytes.TrimSpace(raw)
+
+	if len(raw) == 0 || raw[0] != '{' {
+		writeError(w, http.StatusBadRequest,
+			"INVALID_JSON", "O corpo deve ser um objeto JSON.")
+		return
+	}
+
+	var request multiplicationRequest
+	requestDecoder := json.NewDecoder(bytes.NewReader(raw))
+	requestDecoder.DisallowUnknownFields()
+
+	if err := requestDecoder.Decode(&request); err != nil {
 		var typeError *json.UnmarshalTypeError
 
 		if errors.As(err, &typeError) {
@@ -67,13 +91,6 @@ func MultiplyHandler(w http.ResponseWriter, r *http.Request) {
 
 		writeError(w, http.StatusBadRequest,
 			"INVALID_JSON", "JSON inválido.")
-		return
-	}
-
-	var extra any
-	if err := decoder.Decode(&extra); err != io.EOF {
-		writeError(w, http.StatusBadRequest,
-			"INVALID_JSON", "Apenas um objeto JSON é permitido.")
 		return
 	}
 

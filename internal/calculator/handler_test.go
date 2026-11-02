@@ -98,6 +98,38 @@ func TestMultiplyHandler(t *testing.T) {
 			expectedStatus: http.StatusBadRequest,
 			expectedError:  "INVALID_JSON",
 		},
+		{
+			name:           "corpo null",
+			method:         http.MethodPost,
+			body:           `null`,
+			contentType:    "application/json",
+			expectedStatus: http.StatusBadRequest,
+			expectedError:  "INVALID_JSON",
+		},
+		{
+			name:           "corpo array",
+			method:         http.MethodPost,
+			body:           `[10, 5]`,
+			contentType:    "application/json",
+			expectedStatus: http.StatusBadRequest,
+			expectedError:  "INVALID_JSON",
+		},
+		{
+			name:           "corpo string",
+			method:         http.MethodPost,
+			body:           `"teste"`,
+			contentType:    "application/json",
+			expectedStatus: http.StatusBadRequest,
+			expectedError:  "INVALID_JSON",
+		},
+		{
+			name:           "campo desconhecido",
+			method:         http.MethodPost,
+			body:           `{"a":10,"b":5,"c":2}`,
+			contentType:    "application/json",
+			expectedStatus: http.StatusBadRequest,
+			expectedError:  "INVALID_JSON",
+		},
 	}
 
 	for _, tt := range tests {
