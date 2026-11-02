@@ -1,0 +1,16 @@
+# IDEs
+.idea/
+.vscode/
+
+# Variáveis de ambiente
+.env
+.env.*
+
+# Binários e artefatos Go
+*.exe
+*.test
+*.out
+coverage.out
+
+# Arquivos do sistema
+.DS_Store
