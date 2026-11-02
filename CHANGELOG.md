@@ -7,6 +7,8 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-02
+
 ### Adicionado
 
 - Estrutura inicial do microsserviço de multiplicação em Go.
