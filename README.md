@@ -78,7 +78,7 @@ Alterações incompatíveis no contrato devem ser discutidas e registradas por m
 
 O projeto adota Semantic Versioning (SemVer).
 
-A versão `v1.0.0` será publicada após aprovação do contrato, revisão do Pull Request e validação da integração.
+A versão v1.0.0 será publicada após a revisão do Pull Request, o merge na branch main e a validação da primeira versão estável do microsserviço.
 
 ## Integração
 

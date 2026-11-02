@@ -28,6 +28,7 @@ e utiliza [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Validação
 
-- 10 testes automatizados executados com sucesso.
-- Endpoint validado localmente.
-- Imagem Docker construída e serviço executado em container.
+- 14 cenários de testes automatizados aprovados.
+- Análise estática executada com `go vet ./...`.
+- Endpoint REST validado localmente.
+- Imagem Docker reconstruída e validada após as correções.
